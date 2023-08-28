@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { CdkPS3Stack } from '../lib/cdk-p-s3-stack';
+import { InfraStack } from '../lib/infra-stack';
 
 const app = new cdk.App();
-new CdkPS3Stack(app, 'CdkPS3Stack', {
+new InfraStack(app, 'InfraStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
