@@ -27,8 +27,8 @@ export class InfraStack extends cdk.Stack {
 
     // lambda
     const func = new lambda.Function(this, 'murataTestLambda', {
-      runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
+      runtime: lambda.Runtime.NODEJS_18_X,
       code: lambda.Code.fromAsset('../services/'),
       functionName: 'murataTestFunction',
     })
