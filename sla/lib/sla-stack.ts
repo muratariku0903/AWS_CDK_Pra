@@ -10,10 +10,16 @@ export class SlaStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props)
 
-    // s3
+    // s3 using l2 constructs
     new s3.Bucket(this, 'slaS3Bucket', {
       bucketName: 'sla-s3-bucket',
     })
+
+    // // s3 bucket using l1 constructs
+    // new s3.CfnBucket(this, 'L1S3Bucket', {
+    //   bucketName: 'l1s3bucket',
+    //   versioningConfiguration: { status: 'Enabled' },
+    // })
 
     // iam
     const role = new iam.Role(this, 'slaIAM', {
