@@ -13,7 +13,6 @@ export class CicdStack extends cdk.Stack {
         input: CodePipelineSource.gitHub('muratariku0903/AWS_CDK_Pra', 'master', {
           authentication: cdk.SecretValue.secretsManager('github-pipeline-token', { jsonField: 'github-token' }),
         }),
-        installCommands: [''],
         commands: ['npm i', 'npm run build', 'npx cdk synth'],
       }),
     })
