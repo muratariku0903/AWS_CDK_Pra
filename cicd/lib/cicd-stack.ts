@@ -9,8 +9,8 @@ export class CicdStack extends cdk.Stack {
     // aws ci-cd project
     new CodePipeline(this, 'demopipeline', {
       pipelineName: 'murapipe',
-      synth: new ShellStep('synth', {
-        input: CodePipelineSource.gitHub('muratariku0903/AWS_CDK_Pra', 'main'),
+      synth: new ShellStep('Synth', {
+        input: CodePipelineSource.gitHub('muratariku0903/AWS_CDK_Pra', 'master'),
         commands: ['npm ci', 'npm run build', 'npx cdk synth'],
       }),
     })
