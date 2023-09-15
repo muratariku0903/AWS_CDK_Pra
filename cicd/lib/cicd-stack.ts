@@ -11,9 +11,10 @@ export class CicdStack extends cdk.Stack {
       pipelineName: 'murapipe',
       synth: new ShellStep('Synth', {
         input: CodePipelineSource.gitHub('muratariku0903/AWS_CDK_Pra', 'master', {
-          authentication: cdk.SecretValue.secretsManager('github-pipeline-token'),
+          authentication: cdk.SecretValue.secretsManager('github-pipeline-token', { jsonField: 'github-token' }),
         }),
-        commands: ['npm ci', 'npm run build', 'npx cdk synth'],
+        installCommands: [''],
+        commands: ['npm i', 'npm run build', 'npx cdk synth'],
       }),
     })
   }
