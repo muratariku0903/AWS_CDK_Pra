@@ -18,6 +18,7 @@ export class CicdStack extends cdk.Stack {
         primaryOutputDirectory: 'cicd/cdk.out',
       }),
       dockerEnabledForSynth: true,
+      dockerEnabledForSelfMutation: true,
     })
 
     const testStage = pipeline.addStage(
