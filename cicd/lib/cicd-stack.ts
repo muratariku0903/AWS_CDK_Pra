@@ -1,13 +1,14 @@
 import * as cdk from 'aws-cdk-lib'
 import { Construct } from 'constructs'
-import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines'
+import { CodePipeline, CodePipelineSource, ShellStep, ManualApprovalStep } from 'aws-cdk-lib/pipelines'
+import { PipelineAppStage } from './app-stage-stack'
 
 export class CicdStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props)
 
     // aws ci-cd project
-    new CodePipeline(this, 'demopipeline', {
+    const pipeline = new CodePipeline(this, 'demopipeline', {
       pipelineName: 'murapipe',
       synth: new ShellStep('Synth', {
         input: CodePipelineSource.gitHub('muratariku0903/AWS_CDK_Pra', 'master', {
@@ -17,5 +18,17 @@ export class CicdStack extends cdk.Stack {
         primaryOutputDirectory: 'cicd/cdk.out',
       }),
     })
+
+    const testStage = pipeline.addStage(
+      new PipelineAppStage(this, 'test', {
+        env: { account: '262115391162', region: 'ap-northeast-1' },
+      })
+    )
+
+    const prodStage = pipeline.addStage(
+      new PipelineAppStage(this, 'prod', {
+        env: { account: '262115391162', region: 'ap-northeast-1' },
+      })
+    )
   }
 }
