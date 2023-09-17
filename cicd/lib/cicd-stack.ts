@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib'
 import { Construct } from 'constructs'
-import { CodePipeline, CodePipelineSource, ShellStep, ManualApprovalStep } from 'aws-cdk-lib/pipelines'
+import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines'
 import { PipelineAppStage } from './app-stage-stack'
 
 export class CicdStack extends cdk.Stack {

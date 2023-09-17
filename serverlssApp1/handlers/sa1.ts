@@ -22,8 +22,25 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     // 文字列をJSONに変換
     const jsonContent = JSON.parse(content)
     console.log(jsonContent)
+    const id = jsonContent['id'].toString()
+    const name = jsonContent['name'].toString()
+    const age = jsonContent['age'].toString()
 
-    await dynamoDB.putItem({ TableName: tableName, Item: jsonContent }).promise()
+    // dynamoDBに格納するデータ形式を用意
+    const saveItem: DynamoDB.Put['Item'] = {
+      id: {
+        N: id,
+      },
+      name: {
+        S: name,
+      },
+      age: {
+        N: age,
+      },
+    }
+    console.log(saveItem)
+
+    await dynamoDB.putItem({ TableName: tableName, Item: saveItem }).promise()
 
     return {
       statusCode: 200,

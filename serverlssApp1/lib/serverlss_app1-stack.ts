@@ -4,6 +4,7 @@ import * as iam from 'aws-cdk-lib/aws-iam'
 import * as lambda from 'aws-cdk-lib/aws-lambda'
 import * as s3 from 'aws-cdk-lib/aws-s3'
 import * as s3n from 'aws-cdk-lib/aws-s3-notifications'
+import * as dynamodb from 'aws-cdk-lib/aws-dynamodb'
 import path = require('path')
 
 export class ServerlssApp1Stack extends cdk.Stack {
@@ -31,5 +32,10 @@ export class ServerlssApp1Stack extends cdk.Stack {
       bucketName: 'sa1-s3-bucket',
     })
     sa1Bucket.addEventNotification(s3.EventType.OBJECT_CREATED, new s3n.LambdaDestination(sa1Lambda))
+
+    new dynamodb.Table(this, 'sa1DynamoDBId', {
+      tableName: 'sa1-table',
+      partitionKey: { name: 'id', type: dynamodb.AttributeType.NUMBER },
+    })
   }
 }
