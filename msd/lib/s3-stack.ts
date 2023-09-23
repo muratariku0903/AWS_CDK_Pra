@@ -8,7 +8,7 @@ export class S3Stack extends cdk.Stack {
 
     // s3 bucket
     new s3.Bucket(this, 'msS3bucketId', {
-      bucketName: 'ms-s3-bucket',
+      bucketName: 'ms-s3-bucket-oppai',
     })
   }
 }
